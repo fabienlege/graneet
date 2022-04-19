@@ -22,6 +22,7 @@ export class CityService {
 
   /**
    * Retrive the full city list online from the gouv api and insert it into the database
+   * @returns {Promise<boolean>} true if the cities were successfully inserted
    */
   async syncCities(): Promise<boolean> {
     return new Promise((resolve, reject) => {
