@@ -47,4 +47,17 @@ describe('CityController', () => {
     expect(cities[1].name).toBe('Bayonne');
 
   })
+
+  it("should search for cities", async () => {
+    /**
+     * Search for Paris
+     * expect 2 city here due to mock function at the beginning of this file
+     */
+    const cities = await controller.search("paris");
+
+    expect(cities.length).toBe(2);
+    expect(cities[0].name).toBe('Paris');
+    expect(cities[1].name).toBe('Bayonne');
+  });
+
 });
