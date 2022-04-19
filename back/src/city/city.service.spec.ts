@@ -86,4 +86,22 @@ describe('CityService', () => {
     expect(cities[1].cityCode).toBe('321');
 
   });
+
+  it("should return matching result for given search term", async () => {
+    /**
+     * Search for Paris
+     * Here, we retrieve 2 cities, one for Paris and one for Bayonne due to the mocked find function at the top of this file
+     */
+    const matchingCities = await service.search("paris");
+
+    expect(matchingCities).toHaveLength(2);
+    expect(matchingCities[0].name).toBe('Paris');
+    expect(matchingCities[0].postalCode).toBe('75000');
+    expect(matchingCities[0].cityCode).toBe('123');
+
+    expect(matchingCities[1].name).toBe('Bayonne');
+    expect(matchingCities[1].postalCode).toBe('64100');
+    expect(matchingCities[1].cityCode).toBe('321');
+
+  })
 });

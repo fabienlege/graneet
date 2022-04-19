@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import axios from 'axios';
-import { getConnection, Repository } from 'typeorm';
+import { getConnection, ILike, Like, Repository } from 'typeorm';
 import { City } from './city.entity';
 import { IApiCity } from './interfaces/IApiCity';
 import { ICity } from './interfaces/ICity';
@@ -60,6 +60,22 @@ export class CityService {
       })
         .catch(reject);
 
+    });
+  }
+
+  /**
+   * Retrieve cities from the database with the specified search parameters
+   * @param {string} searchTerm the search term to filter the cities
+   * @returns {Promise<ICity[]>} list of matching cities
+   */
+  async search(searchTerm: string): Promise<ICity[]> {
+    return this.cityRepository.find({
+      where: [
+        { name: ILike(`%${searchTerm}%`) },
+        { postalCode: ILike(`%${searchTerm}%`) },
+      ],
+      order: { name: 'ASC' },
+      take: 100,
     });
   }
 }
