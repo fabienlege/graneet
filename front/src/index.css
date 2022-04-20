@@ -1,0 +1,65 @@
+/* Import fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+/* App css variables */
+:root {
+  --widget-bg: #d2e5e9;
+  --border-radius: 10px;
+  --margin: 30px;
+  --max-width: 1380px;
+
+  /* City */
+  --city-bg: rgba(22, 28, 41, 0.63);
+  --city-name-color: #fff;
+  --city-postalCode-color: #8c8f9a;
+  --city-padding: 20px 14px;
+  --city-row-gap: 25px;
+  --city-column-gap: 33px;
+
+  /* Alerts */
+  --alert-margin: 20px 0 38px;
+  --alert-padding: 20px 30px;
+  --alert-success-bg: rgba(57, 187, 55, 0.63);
+  --alert-success-color: #fff;
+  --alert-warning-bg: rgba(187, 55, 55, 0.63);
+  --alert-warning-color: #fff;
+}
+
+/* Remove body default margin */
+body {
+  margin: 0;
+}
+
+/* Set the font settings for the whole app */
+body,
+.title,
+.searchInput {
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+/* title font size */
+.title {
+  font-size: 30px;
+  line-height: 36.57px;
+}
+
+/* widget styling */
+/* A widget is a rounded box with a background color */
+/* Its user for designing SearchBar and ResultWidget components */
+.widget {
+  display: flex;
+  background: var(--widget-bg);
+  box-sizing: border-box;
+  max-width: var(--max-width);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  width: 100%;
+  flex-direction: column;
+  overflow-block: hidden;
+  padding: 20px 35px;
+}
