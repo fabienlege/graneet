@@ -1,0 +1,27 @@
+name: Test and Build Front
+
+on:
+  push:
+    branches: [ master ]
+
+defaults:
+  run: 
+    working-directory: ./front
+
+jobs:
+
+  testAndBuild:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install sources
+      run: yarn
+    #We do not run test because their's not writted
+    #- name: Run tests
+    #  run: yarn test
+    - name: build production files
+      run: yarn build
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag back:$(date +%s)
