@@ -72,7 +72,8 @@ export class CityService {
   async search(searchTerm: string): Promise<ICity[]> {
     return this.cityRepository.find({
       where: [
-        { name: ILike(`%${searchTerm}%`) },
+        { name: ILike(`%${searchTerm}%`) }, // we use ILIKE to search case insensitively
+        { name: ILike(`%${searchTerm.replace(' ', '-')}%`) }, // replacing space by - for better results
         { postalCode: ILike(`%${searchTerm}%`) },
       ],
       order: { name: 'ASC' },
