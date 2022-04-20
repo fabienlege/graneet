@@ -1,0 +1,69 @@
+version: '3.7'
+
+services:
+
+  # DEV Environment
+  back_dev:
+    image: node:16-alpine
+    volumes:
+      - ./back:/app
+    working_dir: /app
+    command: "npm run start:dev"
+    ports:
+      - "3007:3007"
+    environment:
+      - PORT=3007
+      - JSON_DATASET_URL=https://www.data.gouv.fr/fr/datasets/r/34d4364c-22eb-4ac0-b179-7a1845ac033a
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=postgres
+      - DB_HOST=database_dev
+      - DB_PORT=5432
+    depends_on:
+      - database_dev
+  database_dev:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  front_dev:
+    image: node:16-alpine
+    volumes:
+      - ./front:/app
+    working_dir: /app
+    command: "npm run start"
+    ports:
+      - "3008:3000"
+    environment:
+      - REACT_APP_API_BASE=http://localhost:3007
+    depends_on:
+      - back_dev
+
+  #TEST environment
+  back_test:
+    image: node:16-alpine
+    volumes:
+      - ./back:/app
+    working_dir: /app
+    command: "npm run test:watch"
+    environment:
+      - JSON_DATASET_URL=https://www.data.gouv.fr/fr/datasets/r/34d4364c-22eb-4ac0-b179-7a1845ac033a
+  front_test:
+    image: node:16-alpine
+    volumes:
+      - ./front:/app
+    working_dir: /app
+    command: "npm run test --watch"
+
+  #PG Admin for debug, not required
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - database_dev
+    ports:
+      - "3006:3006"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@graneet.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=3006
