@@ -1,0 +1,17 @@
+/* alert common style */
+.alert {
+  margin: var(--alert-margin);
+  padding: var(--alert-padding);
+}
+
+/* alert success colors */
+.alert.alert-success {
+  background-color: var(--alert-success-bg);
+  color: var(--alert-success-color);
+}
+
+/* alert warning colors */
+.alert.alert-warning {
+  background-color: var(--alert-warning-bg);
+  color: var(--alert-warning-color);
+}

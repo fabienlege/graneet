@@ -1,0 +1,26 @@
+name: Test and Build Back
+
+on:
+  push:
+    branches: [ master ]
+
+defaults:
+  run: 
+    working-directory: ./back
+
+jobs:
+
+  testAndBuild:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install sources
+      run: yarn
+    - name: Run tests
+      env:
+        JSON_DATASET_URL: https://www.data.gouv.fr/fr/datasets/r/34d4364c-22eb-4ac0-b179-7a1845ac033a
+      run: yarn test
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag back:$(date +%s)

@@ -1,0 +1,48 @@
+/*
+ STYLING SEARCHBARWIDGET COMPONENT
+ */
+
+/* searchbar widget */
+.searchBarWidget {
+  padding: 10px 9px 10px 10px;
+}
+
+/* Label displaying before the search input */
+.searchLabel {
+  min-width: 240px;
+  align-self: center;
+}
+
+/* Search input */
+.searchInput {
+  background-color: #f0fcff;
+  border-radius: var(--border-radius);
+  border: none;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 1px var(--margin);
+}
+
+/* Search input placeholder */
+.searchInput::placeholder,
+.searchInput::-moz-placeholder,
+.searchInput::-webkit-input-placeholder {
+  color: #dcdcdc;
+}
+
+/*
+ RESPONSIVE
+ */
+@media screen and (min-width: 1121px) {
+  /* On large screen display expand on 2 columns to display results in 2 columns */
+  .searchBarWidget {
+    grid-column: 1/3;
+    flex-direction: row;
+    padding-left: 35px;
+  }
+
+  /* On large screen only, add a left margin to the search input (for spacing the label) */
+  .searchInput {
+    margin-left: var(--margin);
+  }
+}
