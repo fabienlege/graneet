@@ -1,0 +1,26 @@
+/* App container */
+.app {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 80px auto;
+  gap: var(--margin);
+  max-width: var(--max-width);
+  margin: var(--margin) auto;
+  min-height: calc(100vh - var(--margin) * 2);
+}
+/*
+RESPONSIVE
+*/
+@media screen and (max-width: 1440px) {
+  /* On small screen, add margin to the left and right of app container */
+  .app {
+    margin: var(--margin);
+  }
+}
+@media screen and (max-width: 1120px) {
+  /* On very small screen, display app container in a single column */
+  .app {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 120px auto auto;
+  }
+}
