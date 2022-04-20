@@ -7,6 +7,9 @@ import { City } from './city.entity';
 import { CityService } from './city.service';
 import typeorm = require('typeorm')
 
+// Task could take a while so we use a Promise to avoid blocking the application
+jest.setTimeout(60000); // 60 seconds timeout
+
 describe('CityService', () => {
   let service: CityService;
 
